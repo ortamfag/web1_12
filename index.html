@@ -4,73 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>lab12</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap" rel="stylesheet">
-    <script src="index.js"></script>
 </head>
 <body>
-    <div id="app">
-        <h1>Список студентов</h1>
-        <p>Введите имя и фамилию для добавления студента в список</p>
-        <div class="form">
-            <form action="">
-                <h3>Форма</h3>
-                <div class="form_item">
-                    <label for="surname">Фамилия</label>
-                    <input type="text" id="surname" v-model="surname">
-                </div>
-                <div class="form_item">
-                    <label for="name">Имя</label>
-                    <input type="text" id="name" v-model="name">
-                </div>
-            </form>
-        </div>
-        <p class="counter">
-            Количество знаков:
-            <span>{{name.length + surname.length}}</span>
-        </p>
-        <button class="button" v-bind:disabled="isDisabled" v-on:click="addStudent">Записать</button>
-        <div class="list">
-            <h1>Список</h1>
-            <ol class="ol" v-if="studentList.length">
-                <li class="li" v-for="elem in studentList">{{elem}}</li>
-            </ol>
-            <p v-else>Список пуст</p>
-        </div>
+<div id="app">
+    <h1>Список студентов</h1>
+    <p>Введите имя и фамилию для добавления студента в список</p>
+    <div class="form">
+        <form action="">
+            <h3>Форма</h3>
+            <div class="form_item">
+                <label for="surname">Фамилия</label>
+                <input type="text" id="surname" v-model="surname">
+            </div>
+            <div class="form_item">
+                <label for="name">Имя</label>
+                <input type="text" id="name" v-model="name">
+            </div>
+        </form>
     </div>
+    <p class="counter">
+        Количество знаков:
+        <span>{{name.length + surname.length}}</span>
+    </p>
+    <button class="button" v-bind:disabled="isDisabled" v-on:click="addStudent">Записать</button>
+    <div class="list">
+        <h1>Список</h1>
+        <ol class="ol" v-if="studentList.length">
+            <li class="li" v-for="elem in studentList">{{elem}}</li>
+        </ol>
+        <p v-else>Список пуст</p>
+    </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 
-    
-    <script>
-        let app = new Vue({
-            el: '#app',
-            data: {
-                studentList: [],
-                counter: 0,
-                name: "Артем",
-                surname: "Жидов"
-            },
-            methods: {
-                addStudent() {
-                    const name = this.name.charAt(0).toUpperCase() + this.name.substring(1).toLowerCase()
-                const surname = this.surname.charAt(0).toUpperCase() + this.surname.substring(1).toLowerCase()
-                    const studentName = `${name} ${surname}`
-                    this.studentList.push(studentName)
-                    this.name = ""
-                    this.surname = ""
-                }
-            },
-            computed: {
-                isDisabled() {  
-                    return this.name.length === 0 || this.surname.length === 0;
-                }
+
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            studentList: [],
+            counter: 0,
+            name: "Артем",
+            surname: "Жидов"
+        },
+        methods: {
+            addStudent() {
+                let name, surname
+                surname = name = this.name.charAt(0).toUpperCase() + this.name.substring(1).toLowerCase()
+                const studentName = `${name} ${surname}`
+                this.studentList.push(studentName)
+                this.name = this.surname = ""
             }
-        });
-     </script>
+        },
+        computed: {
+            isDisabled() {
+                return this.name.length === 0 || this.surname.length === 0;
+            }
+        }
+    });
+</script>
 
-        
+
 </body>
 </html>
